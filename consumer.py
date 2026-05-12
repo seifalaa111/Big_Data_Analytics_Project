@@ -33,14 +33,17 @@ def load_model():
 
 
 def init_results_file():
-    """Create the results CSV with headers if it doesn't exist."""
-    if not os.path.exists(RESULTS_FILE):
-        with open(RESULTS_FILE, "w", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                "timestamp", "transaction_id", "amount",
-                "prediction", "fraud_probability", "true_label"
-            ])
+    """Create or overwrite the results CSV with headers and clear the alert log."""
+    with open(RESULTS_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "timestamp", "transaction_id", "amount",
+            "prediction", "fraud_probability", "true_label"
+        ])
+    
+    # Also clear the fraud alerts log so it stays synced with the new run
+    with open(ALERT_LOG, "w") as f:
+        pass
 
 
 def log_alert(txn_id, amount, prob):
@@ -98,6 +101,7 @@ def main():
             auto_offset_reset="latest",
             enable_auto_commit=False,
             group_id=None,
+            api_version=(2, 5, 0),
         )
 
         count = 0

@@ -3,7 +3,6 @@ producer.py - Kafka Transaction Producer
 Reads creditcard.csv and streams each row as a JSON message
 into the 'transactions' Kafka topic, simulating a live feed.
 """
-
 import pandas as pd
 import json
 import time
@@ -20,6 +19,7 @@ def create_producer():
     producer = KafkaProducer(
         bootstrap_servers=[KAFKA_BROKER],
         value_serializer=lambda v: json.dumps(v).encode("utf-8"),
+        api_version=(2, 5, 0),
     )
     print("Connected.\n")
     return producer
