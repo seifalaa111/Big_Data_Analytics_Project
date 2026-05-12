@@ -1,0 +1,5 @@
+__pycache__/
+creditcard.csv
+*.log
+results.csv
+.ipynb_checkpoints/

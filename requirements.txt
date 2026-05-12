@@ -1,0 +1,21 @@
+# Data Processing
+pandas
+numpy
+
+# Machine Learning
+scikit-learn
+xgboost
+imbalanced-learn
+
+# Kafka
+kafka-python-ng
+
+# Dashboard & Visualization
+streamlit
+plotly
+
+# Serialization
+joblib
+
+# Apache Spark (Bonus)
+pyspark
